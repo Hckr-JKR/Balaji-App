@@ -1,0 +1,133 @@
+🏢 Project Idea — Balaji Apartment
+Balaji Apartment is a mobile-first Progressive Web App (PWA) specifically designed for apartment buildings to track maintenance fee collections, log expenses, and manage room-wise accounting. It supports UPI-based payments, receipt generation, multi-language support, and is accessible only to admins and residents. The app works offline and provides a virtual fund balance to ensure transparency in building finances.
+
+📄 Project Design Report (PDR)
+1. 🎯 Objective
+The Balaji Apartment web app aims to:
+
+Track room-wise maintenance fee payments
+
+Allow UPI payments and generate receipts
+
+Enable admins to log expenses and calculate a virtual fund balance
+
+Send reminders for dues
+
+Offer multi-language support for diverse users
+
+Be a mobile-first, installable app for easy use
+
+2. 👥 Target Users
+Admins (Building Collectors/Committee): Manage finances, log expenses, track payments
+
+Residents: Pay maintenance fees, view room payments, receive receipts, and get reminders
+
+3. 💡 Core Features
+Feature	Description
+🔐 Login System	Firebase Authentication for role-based access (admin, resident)
+🏠 Room-Wise Payment Tracking	Track payments by room, including dues, payments made, and receipts
+💳 UPI Payments	UPI deep link and QR code for easy payments
+🧾 Receipt Generation	Automatic PDF receipt generation on successful payments
+💰 Expense Logging	Admin can log expenses, add categories, and upload proof (receipts, invoices)
+📊 Virtual Balance	Calculated balance = total room payments – total expenses
+🔁 Dynamic UPI Linking	Admins can update UPI details whenever necessary
+🔔 Notifications	Push notifications/reminders for dues, payment deadlines
+🌐 Multi-Language Support	Support for multiple languages (e.g., English, Hindi, Marathi, Tamil)
+📱 PWA Support	Web app installable as a mobile app, works offline
+📤 Data Export	CSV/PDF reports for admin tracking of payments and expenses
+4. 🔐 Privacy & Internal Access
+Private Access: The app is accessible only via a unique link shared with building residents.
+
+Role-Based Access:
+
+Admins: Full control over finances, expenses, and settings
+
+Residents: Limited to payment management, viewing room history, and receiving reminders
+
+5. 🧱 Technical Stack
+Layer	Tool/Tech
+Frontend	React.js + Tailwind CSS
+Backend/Auth	Firebase Auth + Firestore
+Hosting	Firebase Hosting
+Payments	UPI Deep Links + QR Generator
+Language	react-i18next for i18n
+Notifications	Firebase Cloud Messaging
+Export	jsPDF + react-csv
+Storage	Firebase Storage (for receipts)
+PWA Features	Service Workers + Manifest
+6. 🔧 Database Design (Firestore)
+markdown
+Copy code
+users/
+  - uid
+    - name
+    - role: 'admin' | 'resident'
+    - roomNumber
+    - preferredLanguage
+    - contact
+
+rooms/
+  - roomNumber
+    - totalDue
+    - payments: [ { amount, date, receiptURL } ]
+
+expenses/
+  - expenseId
+    - title
+    - amount
+    - category
+    - date
+    - proofURL
+
+settings/
+  - upiID
+  - adminUserId
+  - languageOptions
+7. 💸 How Balance Works
+No direct access to real bank accounts.
+
+The virtual balance is simply calculated as:
+
+ini
+Copy code
+Balance = Total Room Payments – Total Expenses
+The UPI payment flow is handled by deep links and QR codes associated with each room number. Payments are tracked, and receipts are automatically generated and linked to the respective room.
+
+8. 🌐 Multi-Language Support
+The app will initially support multiple languages to cater to vernacular users.
+
+Languages: English, Hindi, Marathi, Tamil, Bengali, Telugu (expandable).
+
+Language selection happens at the time of login or in settings, using react-i18next.
+
+9. 📲 Mobile & PWA Features
+PWA Capability	Benefit
+Installable on mobile	Acts like a native mobile app
+Fullscreen UI	No browser address bar (immersive)
+Add to home screen	Users can add the app as a shortcut to their home screen
+Offline support	Offline access to cached data for payments and balances
+10. 🛠 Development Roadmap (8 Weeks)
+Week	Tasks
+1	Set up Firebase, React boilerplate, routing
+2	Set up Firebase Authentication (admin and resident roles)
+3	Room tracking and payment history
+4	UPI QR generation and payment deep link setup
+5	Admin's expense logging and virtual balance calculation
+6	Notifications integration (FCM or EmailJS)
+7	Multi-language UI setup using react-i18next
+8	Implement PWA features and test on Android/iOS devices
+11. 📦 Future Features (Optional)
+Support for multiple buildings under a single app instance
+
+Resident-initiated registration via access code
+
+Automatic UPI payment verification (if budget allows)
+
+Offline-first experience (using IndexedDB for local data storage)
+
+Graphs and charts for visualizing accounting trends
+
+✅ Summary
+Balaji Apartment provides a lightweight, mobile-first web application designed to manage apartment maintenance finances. With features like room-wise payment tracking, UPI-based payments, expense logging, receipt generation, multi-language support, and PWA capabilities, it empowers residents and admins to manage funds efficiently and transparently.
+
+The app ensures privacy, role-based access, and works offline for easy mobile access, making it perfect for apartment societies.
